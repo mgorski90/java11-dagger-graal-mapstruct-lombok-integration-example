@@ -1,0 +1,9 @@
+Just playing with native compilation of simple JDK11 application to native application (Linux / ELF64). Testing integration of
+Google Dagger 2 DI container together with Lombok and MapStruct. No reflection is used.
+
+Requires JAVA_HOME to be set on graalvm-ce-java11-20.0.0 to make a native compilation work.
+$ mvn clean package -P native
+For standard HotSpot just don't use native profile.
+$ mvn clean package
+
+Stub for more sophisticated use cases in the future.
