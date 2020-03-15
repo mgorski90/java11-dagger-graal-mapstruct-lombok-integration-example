@@ -2,8 +2,8 @@ package pl.mgorski;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.mgorski.mapper.PersonMapper;
-import pl.mgorski.mapper.PersonMapperImpl;
+import org.mapstruct.factory.Mappers;
+import pl.mgorski.mapper.MessageMapper;
 import pl.mgorski.repository.MessageRepository;
 import pl.mgorski.service.MessageService;
 
@@ -20,8 +20,11 @@ public class MessageModule {
 
     @Provides
     @Singleton
-    PersonMapper producePersonMapper() {
-        return new PersonMapperImpl();
+    MessageMapper producePersonMapper() {
+        // to support this native-image.properties was added (educational purpose) and reflection_config.json, but you can go without this
+        // just returning plain compile-time dependency new MessageMapperImpl()
+        // than you can remove reflection_config.json
+        return Mappers.getMapper(MessageMapper.class);
     }
 
     @Provides

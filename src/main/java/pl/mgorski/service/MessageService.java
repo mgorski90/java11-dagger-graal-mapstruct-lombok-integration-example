@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import pl.mgorski.Message;
 import pl.mgorski.MessageDTO;
-import pl.mgorski.mapper.PersonMapper;
+import pl.mgorski.mapper.MessageMapper;
 import pl.mgorski.repository.MessageRepository;
 
 import javax.inject.Singleton;
@@ -17,10 +17,10 @@ import static java.util.stream.Collectors.toList;
 public class MessageService {
 
     private final MessageRepository messageRepository;
-    private final PersonMapper personMapper;
+    private final MessageMapper messageMapper;
 
     public void putCorrected(MessageDTO messageDTO) {
-        Message message = personMapper.fromDto(messageDTO);
+        Message message = messageMapper.fromDto(messageDTO);
         // business logic simulation: convert to lowercase and capitalize
         message.setName(StringUtils.capitalize(StringUtils.lowerCase(messageDTO.getName())));
         messageRepository.put(message);
@@ -30,7 +30,7 @@ public class MessageService {
         return messageRepository
                 .findAll()
                 .stream()
-                .map(personMapper::toDto)
+                .map(messageMapper::toDto)
                 .collect(toList());
     }
 

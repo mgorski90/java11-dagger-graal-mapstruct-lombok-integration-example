@@ -8,7 +8,7 @@ import javax.inject.Singleton;
 
 @Singleton
 @Mapper
-public interface PersonMapper {
+public interface MessageMapper {
 
     Message fromDto(MessageDTO input);
 
